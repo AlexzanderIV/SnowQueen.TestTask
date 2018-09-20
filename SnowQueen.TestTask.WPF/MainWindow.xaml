@@ -3,10 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SnowQueen.TestTask.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Add product" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>            
+        </Grid.RowDefinitions>
+        <Label>Name:</Label>
+        <TextBox Grid.Column="1" Margin="0,4,0,6"></TextBox>
+        <Label Grid.Row="1">Price:</Label>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4,0,6"></TextBox>
+        <Label Grid.Row="2">Amount:</Label>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,4,0,6"></TextBox>
     </Grid>
 </Window>

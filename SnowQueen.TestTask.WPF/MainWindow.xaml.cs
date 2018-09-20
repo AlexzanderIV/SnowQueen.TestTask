@@ -23,6 +23,13 @@ namespace SnowQueen.TestTask.WPF
         public MainWindow()
         {
             InitializeComponent();
+
+            var testProduct = new ProductViewModel
+            {
+                Name = "Test product",
+                Price = 24.99M,
+                Amount = 3
+            };
         }
     }
 }
