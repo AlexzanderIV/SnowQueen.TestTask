@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SnowQueen.TestTask.WPF"
         mc:Ignorable="d"
-        Title="Add product" Height="450" Width="800">
+        Title="Add product" Height="300" Width="500" FontSize="16">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -24,5 +24,6 @@
         <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4,0,6"></TextBox>
         <Label Grid.Row="2">Amount:</Label>
         <TextBox Grid.Row="2" Grid.Column="1" Margin="0,4,0,6"></TextBox>
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="0,20,0,20" HorizontalAlignment="Center" VerticalAlignment="Top">Add product</Button>
     </Grid>
 </Window>

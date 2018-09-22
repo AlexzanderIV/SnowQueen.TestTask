@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SnowQueen.TestTask.DataAccess;
 
 namespace SnowQueen.TestTask.WPF
 {
@@ -24,15 +23,6 @@ namespace SnowQueen.TestTask.WPF
         public MainWindow()
         {
             InitializeComponent();
-
-            var testProduct = new ProductViewModel
-            {
-                Name = "Test product",
-                Price = 24.99M,
-                Amount = 3
-            };
-
-            DBRepository<DataAccess.Entities.Product>.TestTask(testProduct.Name, testProduct.Price, testProduct.Amount);
         }
     }
 }
