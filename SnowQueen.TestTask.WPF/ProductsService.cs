@@ -18,7 +18,8 @@ namespace SnowQueen.TestTask.WPF
                 Amount = 3
             };
 
-            DBRepository<DataAccess.Entities.Product>.TestTask(testProduct.Name, testProduct.Price, testProduct.Amount);
+            //DBRepository<DataAccess.Entities.Product>.TestTask(testProduct.Name, testProduct.Price, testProduct.Amount);
+            var products = new FileRepository<DataAccess.Entities.Product> ("/testFile.txt").Get();
         }
 
 
