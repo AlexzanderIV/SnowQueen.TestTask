@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SnowQueen.TestTask.DataAccess;
 
 namespace SnowQueen.TestTask.WPF
 {
@@ -30,6 +31,8 @@ namespace SnowQueen.TestTask.WPF
                 Price = 24.99M,
                 Amount = 3
             };
+
+            DBRepository<DataAccess.Entities.Product>.TestTask(testProduct.Name, testProduct.Price, testProduct.Amount);
         }
     }
 }
