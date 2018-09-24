@@ -6,7 +6,8 @@ using System.Linq;
 
 namespace SnowQueen.TestTask.DataAccess
 {
-    public class DBRepository<TEntity> : IRepository<TEntity>, IDisposable
+    // TODO: MOVE TO WCF SERVICE
+    public class DBRepository<TEntity> : IRepository<TEntity>
         where TEntity: Entity
     {
         private readonly AppDbContext _context;

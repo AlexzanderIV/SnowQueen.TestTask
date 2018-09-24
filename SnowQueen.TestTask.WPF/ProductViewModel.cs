@@ -12,5 +12,15 @@ namespace SnowQueen.TestTask.WPF
 
         [Required]
         public int Amount { get; set; }
+
+        public DataAccess.Dtos.ProductDto ToDto()
+        {
+            return new DataAccess.Dtos.ProductDto
+            {
+                Name = Name,
+                Price = Price,
+                Amount = Amount
+            };
+        }
     }
 }
