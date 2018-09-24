@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SnowQueen.TestTask.WPF"
         mc:Ignorable="d"
         Title="Add product" Height="300" Width="500" FontSize="16">
@@ -19,11 +18,11 @@
             <RowDefinition Height="*"></RowDefinition>            
         </Grid.RowDefinitions>
         <Label>Name:</Label>
-        <TextBox Grid.Column="1" Margin="0,4,0,6"></TextBox>
+        <TextBox x:Name="tbName" Grid.Column="1" Margin="0,4,0,6" Text="{Binding Path=Name}"></TextBox>
         <Label Grid.Row="1">Price:</Label>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4,0,6"></TextBox>
+        <TextBox x:Name="tbPrice" Grid.Row="1" Grid.Column="1" Margin="0,4,0,6" Text="{Binding Path=Price}"></TextBox>
         <Label Grid.Row="2">Amount:</Label>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,4,0,6"></TextBox>
-        <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="0,20,0,20" HorizontalAlignment="Center" VerticalAlignment="Top">Add product</Button>
+        <TextBox x:Name="tbAmount" Grid.Row="2" Grid.Column="1" Margin="0,4,0,6" Text="{Binding Path=Amount}"></TextBox>
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="0,20,0,20" HorizontalAlignment="Center" VerticalAlignment="Top" Click="AddProduct">Add product</Button>
     </Grid>
 </Window>

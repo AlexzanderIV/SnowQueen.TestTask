@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,23 +23,19 @@ namespace SnowQueen.TestTask.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ProductViewModel product = new ProductViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = product;
+        }
 
-            var testProduct = new ProductViewModel
+        private void AddProduct(object sender, RoutedEventArgs e)
+        {
+            using (var repository = new FileRepository<DataAccess.Entities.Product>(ConfigurationManager.AppSettings["FileStoragePath"]))
             {
-                Name = "Test product",
-                Price = 24.99M,
-                Amount = 3
-            };
-
-            using (var repository = new FileRepository<DataAccess.Entities.Product>("DB/testFile.txt"))
-            {
-                // TODO: DELETE
-                var products = repository.Get();
-
-                new ProductsService(repository).SaveProduct(testProduct.ToDto());
+                new ProductsService(repository).SaveProduct(product.ToDto());
             }
         }
     }
