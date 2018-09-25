@@ -23,25 +23,42 @@ namespace SnowQueen.TestTask.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ProductViewModel product = new ProductViewModel();
+        private ProductViewModel product;
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = product;
+            UpdateBinding();
         }
 
         private void AddProduct(object sender, RoutedEventArgs e)
         {
-            // TODO: Call WCF-service.
-
-            // Save product to file.
-            using (var repository = FileRepositoryFactory<DataAccess.Entities.Product>.Create())
+            try
             {
-                new ProductsService(repository).SaveProduct(product.ToDto());
-            }
+                tblResult.Text = string.Empty;
 
-            // Clear form.
+                // TODO: Call WCF-service.
+
+                // Save product to file.
+                using (var repository = FileRepositoryFactory<DataAccess.Entities.Product>.Create())
+                {
+                    new ProductsService(repository).SaveProduct(product.ToDto());
+                }
+
+                tblResult.Text = "Product successfully added.";
+                tblResult.Foreground = new SolidColorBrush(Colors.Green);
+                // Clear form.
+                UpdateBinding();
+            }
+            catch (Exception ex)
+            {
+                tblResult.Text = $"An error has occured: {ex.Message}";
+                tblResult.Foreground = new SolidColorBrush(Colors.Red);
+            }
+        }
+
+        private void UpdateBinding()
+        {
             product = new ProductViewModel();
             DataContext = product;
         }
