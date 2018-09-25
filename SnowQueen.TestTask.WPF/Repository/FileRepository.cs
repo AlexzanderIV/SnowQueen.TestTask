@@ -1,12 +1,12 @@
-﻿using SnowQueen.TestTask.DataAccess.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.IO;
 using System.Text;
+using SnowQueen.TestTask.DataAccess;
+using SnowQueen.TestTask.DataAccess.Entities;
 
-namespace SnowQueen.TestTask.DataAccess
+namespace SnowQueen.TestTask.WPF.Repository
 {
     public class FileRepository<TEntity> : IRepository<TEntity>
         where TEntity: Entity, new()
@@ -164,9 +164,9 @@ namespace SnowQueen.TestTask.DataAccess
                 idValue = Int32.Parse(dataArray[0]);
             }
 
-            for (var i = 1; i < dataArray.Length; i++)
+            var dataArrayIndex = 1;
+            for (var propertyIndex = 0; propertyIndex < dataArray.Length; propertyIndex++)
             {
-                var propertyIndex = i - 1;
                 if (idValue.HasValue && properties[propertyIndex].Name == idProperty.Name)
                 {
                     properties[propertyIndex].SetValue(entity, idValue);
@@ -174,7 +174,7 @@ namespace SnowQueen.TestTask.DataAccess
                 else
                 {
                     var propertyType = properties[propertyIndex].PropertyType;
-                    var value = Convert.ChangeType(dataArray[i], propertyType);
+                    var value = Convert.ChangeType(dataArray[dataArrayIndex++], propertyType);
                     properties[propertyIndex].SetValue(entity, value);
                 }
             }

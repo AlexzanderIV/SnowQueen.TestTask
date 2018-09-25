@@ -13,8 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SnowQueen.TestTask.DataAccess;
 using SnowQueen.TestTask.DataAccess.Services;
+using SnowQueen.TestTask.WPF.Repository;
 
 namespace SnowQueen.TestTask.WPF
 {
@@ -33,10 +33,17 @@ namespace SnowQueen.TestTask.WPF
 
         private void AddProduct(object sender, RoutedEventArgs e)
         {
-            using (var repository = new FileRepository<DataAccess.Entities.Product>(ConfigurationManager.AppSettings["FileStoragePath"]))
+            // TODO: Call WCF-service.
+
+            // Save product to file.
+            using (var repository = FileRepositoryFactory<DataAccess.Entities.Product>.Create())
             {
                 new ProductsService(repository).SaveProduct(product.ToDto());
             }
+
+            // Clear form.
+            product = new ProductViewModel();
+            DataContext = product;
         }
     }
 }
