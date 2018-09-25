@@ -1,5 +1,8 @@
-﻿namespace SnowQueen.TestTask.DataAccess.Dtos
+﻿using System.Runtime.Serialization;
+
+namespace SnowQueen.TestTask.DataAccess.Dtos
 {
+    [DataContract]
     public class ProductDto
     {
         public string Name { get; set; }

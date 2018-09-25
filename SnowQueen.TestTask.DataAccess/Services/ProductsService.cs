@@ -1,11 +1,6 @@
-﻿using SnowQueen.TestTask.DataAccess;
+﻿using System.Collections.Generic;
 using SnowQueen.TestTask.DataAccess.Dtos;
 using SnowQueen.TestTask.DataAccess.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SnowQueen.TestTask.DataAccess.Services
 {
@@ -32,10 +27,7 @@ namespace SnowQueen.TestTask.DataAccess.Services
 
         public IEnumerable<Product> GetAllProducts()
         {
-            //DBRepository<DataAccess.Entities.Product>.TestTask(testProduct.Name, testProduct.Price, testProduct.Amount);
-
             var products = _repository.Get();
-
             return products;
         }
     }

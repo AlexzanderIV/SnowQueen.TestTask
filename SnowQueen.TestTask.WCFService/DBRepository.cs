@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace SnowQueen.TestTask.DataAccess
 {
-    // TODO: MOVE TO WCF SERVICE
     public class DBRepository<TEntity> : IRepository<TEntity>
         where TEntity: Entity
     {

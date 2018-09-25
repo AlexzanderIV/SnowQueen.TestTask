@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SnowQueen.TestTask.DataAccess.Services;
+using SnowQueen.TestTask.WPF.ProductsWebService;
 using SnowQueen.TestTask.WPF.Repository;
 
 namespace SnowQueen.TestTask.WPF
@@ -37,12 +38,17 @@ namespace SnowQueen.TestTask.WPF
             {
                 tblResult.Text = string.Empty;
 
-                // TODO: Call WCF-service.
+                var productDto = product.ToDto();
+
+                // Call WCF-service.
+                ProductsWebServiceClient wcfClient = new ProductsWebServiceClient("BasicHttpBinding_IProductsWebService");
+                //ProductsWebServiceClient wcfClient = new ProductsWebServiceClient();
+                wcfClient.AddProduct(productDto);
 
                 // Save product to file.
                 using (var repository = FileRepositoryFactory<DataAccess.Entities.Product>.Create())
                 {
-                    new ProductsService(repository).SaveProduct(product.ToDto());
+                    new ProductsService(repository).SaveProduct(productDto);
                 }
 
                 tblResult.Text = "Product successfully added.";
