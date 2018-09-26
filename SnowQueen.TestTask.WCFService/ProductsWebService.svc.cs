@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SnowQueen.TestTask.DataAccess;
 using SnowQueen.TestTask.DataAccess.Dtos;
 using SnowQueen.TestTask.DataAccess.Entities;
 using SnowQueen.TestTask.DataAccess.Services;
@@ -16,18 +15,18 @@ namespace SnowQueen.TestTask.WCFService
         /// Save product to DB.
         /// </summary>
         /// <param name="productDto">Product DTO to save to DB.</param>
-        public void AddProduct(ProductDto productDto)
+        public void AddProduct(ProductDataContract product)
         {
-            if (productDto == null)
+            if (product == null)
             {
-                throw new ArgumentNullException(nameof(productDto));
+                throw new ArgumentNullException(nameof(product));
             }
 
             try
             {
                 using (var repository = new DBRepository<Product>())
                 {
-                    new ProductsService(repository).SaveProduct(productDto);
+                    new ProductsService(repository).SaveProduct(ToDto(product));
                 }
             }
             catch (Exception ex)
@@ -41,20 +40,24 @@ namespace SnowQueen.TestTask.WCFService
         /// Save several products to DB.
         /// </summary>
         /// <param name="productDtos">List of product DTOs to save to DB.</param>
-        public void AddSeveralProducts(IEnumerable<ProductDto> productDtos)
+        public void AddSeveralProducts(IEnumerable<ProductDataContract> products)
         {
-            if (productDtos == null)
+            if (products == null)
             {
-                throw new ArgumentNullException(nameof(productDtos));
+                throw new ArgumentNullException(nameof(products));
             }
 
             using (var repository = new DBRepository<Product>())
             {
                 var service = new ProductsService(repository);
 
-                foreach (var productDto in productDtos)
+                foreach (var product in products)
                 {
-                    service.SaveProduct(productDto);
+                    var productDto = new ProductDto
+                    {
+
+                    };
+                    service.SaveProduct(ToDto(product));
                 }
             }
         }
@@ -63,17 +66,27 @@ namespace SnowQueen.TestTask.WCFService
         /// Get all products from DB.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ProductDto> GetProducts()
+        public IEnumerable<ProductDataContract> GetProducts()
         {
             using (var repository = new DBRepository<Product>())
             {
-                return new ProductsService(repository).GetAllProducts().Select(p => new ProductDto
+                return new ProductsService(repository).GetAllProducts().Select(p => new ProductDataContract
                 {
                     Name = p.Name,
                     Price = p.Price,
                     Amount = p.Amount
                 });
             }
+        }
+
+        private ProductDto ToDto(ProductDataContract dataContract)
+        {
+            return new ProductDto
+            {
+                Name = dataContract.Name,
+                Price = dataContract.Price,
+                Amount = dataContract.Amount
+            };
         }
     }
 }

@@ -1,13 +1,15 @@
-﻿using SnowQueen.TestTask.DataAccess.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
+using SnowQueen.TestTask.DataAccess;
+using SnowQueen.TestTask.DataAccess.Entities;
 
-namespace SnowQueen.TestTask.DataAccess
+namespace SnowQueen.TestTask.WCFService
 {
     public class DBRepository<TEntity> : IRepository<TEntity>
-        where TEntity: Entity
+        where TEntity : Entity
     {
         private readonly AppDbContext _context;
         private DbSet<TEntity> _dbSet;
@@ -65,19 +67,19 @@ namespace SnowQueen.TestTask.DataAccess
             }
         }
 
-        // TODO: DELETE. TEST SAVE TO DB
-        public static void TestTask(string name, decimal price, int amount)
-        {
-            using (var repo = new DBRepository<Product>())
-            {
-                var product = new Product
-                {
-                    Name = name,
-                    Price = price,
-                    Amount = amount
-                };
-                repo.Create(product);
-            }
-        }
+        //// TODO: DELETE. TEST SAVE TO DB
+        //public static void TestTask(string name, decimal price, int amount)
+        //{
+        //    using (var repo = new DBRepository<Product>())
+        //    {
+        //        var product = new Product
+        //        {
+        //            Name = name,
+        //            Price = price,
+        //            Amount = amount
+        //        };
+        //        repo.Create(product);
+        //    }
+        //}
     }
 }

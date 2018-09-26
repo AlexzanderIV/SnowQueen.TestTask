@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8A48A8C0-44DC-4D3E-A0D4-7E0EA1BB83AD}</ProjectGuid>
+    <ProjectGuid>{9DAD4091-7B92-4EEF-B719-04372088E9B0}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SnowQueen.TestTask.DataAccess\SnowQueen.TestTask.DataAccess.csproj">
-      <Project>{7A3D8CF7-FAB9-433F-97A1-9691B8C1EED0}</Project>
+      <Project>{49564BE1-2138-462D-937A-32B66EFDCA62}</Project>
       <Name>SnowQueen.TestTask.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
@@ -110,7 +110,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>53106</DevelopmentServerPort>
+          <DevelopmentServerPort>51008</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:53106/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

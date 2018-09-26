@@ -2,7 +2,7 @@
 
 namespace SnowQueen.TestTask.DataAccess.Dtos
 {
-    [DataContract]
+    //[DataContract]
     public class ProductDto
     {
         public string Name { get; set; }

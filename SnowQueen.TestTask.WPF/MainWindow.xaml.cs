@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SnowQueen.TestTask.DataAccess.Dtos;
 using SnowQueen.TestTask.DataAccess.Services;
 using SnowQueen.TestTask.WPF.ProductsWebService;
 using SnowQueen.TestTask.WPF.Repository;
@@ -42,8 +43,8 @@ namespace SnowQueen.TestTask.WPF
 
                 // Call WCF-service.
                 ProductsWebServiceClient wcfClient = new ProductsWebServiceClient("BasicHttpBinding_IProductsWebService");
-                //ProductsWebServiceClient wcfClient = new ProductsWebServiceClient();
-                wcfClient.AddProduct(productDto);
+                var dataContract = FromDto(productDto);
+                wcfClient.AddProduct(dataContract);
 
                 // Save product to file.
                 using (var repository = FileRepositoryFactory<DataAccess.Entities.Product>.Create())
@@ -61,6 +62,16 @@ namespace SnowQueen.TestTask.WPF
                 tblResult.Text = $"An error has occured: {ex.Message}";
                 tblResult.Foreground = new SolidColorBrush(Colors.Red);
             }
+        }
+
+        private ProductDataContract FromDto(ProductDto productDto)
+        {
+            return new ProductDataContract
+            {
+                Name = productDto.Name,
+                Price = productDto.Price,
+                Amount = productDto.Amount
+            };
         }
 
         private void UpdateBinding()
