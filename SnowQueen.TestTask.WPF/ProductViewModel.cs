@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SnowQueen.TestTask.WPF.ProductsWebService;
+using System.ComponentModel.DataAnnotations;
 
 namespace SnowQueen.TestTask.WPF
 {
@@ -16,6 +17,16 @@ namespace SnowQueen.TestTask.WPF
         public DataAccess.Dtos.ProductDto ToDto()
         {
             return new DataAccess.Dtos.ProductDto
+            {
+                Name = Name,
+                Price = Price,
+                Amount = Amount
+            };
+        }
+
+        public ProductDataContract ToDataContract()
+        {
+            return new ProductDataContract
             {
                 Name = Name,
                 Price = Price,

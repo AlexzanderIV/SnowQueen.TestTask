@@ -22,17 +22,9 @@ namespace SnowQueen.TestTask.WCFService
                 throw new ArgumentNullException(nameof(product));
             }
 
-            try
+            using (var repository = new DBRepository<Product>())
             {
-                using (var repository = new DBRepository<Product>())
-                {
-                    new ProductsService(repository).SaveProduct(ToDto(product));
-                }
-            }
-            catch (Exception ex)
-            {
-                var tmp = ex;
-                throw;
+                new ProductsService(repository).SaveProduct(ToDto(product));
             }
         }
 
@@ -53,10 +45,6 @@ namespace SnowQueen.TestTask.WCFService
 
                 foreach (var product in products)
                 {
-                    var productDto = new ProductDto
-                    {
-
-                    };
                     service.SaveProduct(ToDto(product));
                 }
             }
@@ -70,12 +58,7 @@ namespace SnowQueen.TestTask.WCFService
         {
             using (var repository = new DBRepository<Product>())
             {
-                return new ProductsService(repository).GetAllProducts().Select(p => new ProductDataContract
-                {
-                    Name = p.Name,
-                    Price = p.Price,
-                    Amount = p.Amount
-                });
+                return new ProductsService(repository).GetAllProducts().Select(p => ToDataContract(p));
             }
         }
 
@@ -86,6 +69,16 @@ namespace SnowQueen.TestTask.WCFService
                 Name = dataContract.Name,
                 Price = dataContract.Price,
                 Amount = dataContract.Amount
+            };
+        }
+
+        private ProductDataContract ToDataContract(Product product)
+        {
+            return new ProductDataContract
+            {
+                Name = product.Name,
+                Price = product.Price,
+                Amount = product.Amount
             };
         }
     }
