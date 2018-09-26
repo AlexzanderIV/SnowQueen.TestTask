@@ -80,7 +80,7 @@ namespace SnowQueen.TestTask.WPF
             }
             else
             {
-                tblResult.Text = "Product successfully added.";
+                tblResult.Text = errorMessage;
                 tblResult.Foreground = new SolidColorBrush(Colors.Red);
             }
             
