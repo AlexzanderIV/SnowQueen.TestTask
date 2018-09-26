@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,7 +11,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SnowQueen.TestTask.DataAccess.Services;
 using SnowQueen.TestTask.WPF.ProductsWebService;
-using SnowQueen.TestTask.WPF.Repository;
 
 namespace SnowQueen.TestTask.WPF
 {
@@ -53,9 +53,10 @@ namespace SnowQueen.TestTask.WPF
             try
             {
                 // Save product to file.
-                using (var repository = FileRepositoryFactory<DataAccess.Entities.Product>.Create())
+                using (var service = 
+                    ProductsServiceFactory.CreateWithFileRepository(ConfigurationManager.AppSettings["FileStoragePath"]))
                 {
-                    new ProductsService(repository).SaveProduct(_product.ToDto());
+                    service.SaveProduct(_product.ToDto());
                 }
                 isSuccess = true;
             }

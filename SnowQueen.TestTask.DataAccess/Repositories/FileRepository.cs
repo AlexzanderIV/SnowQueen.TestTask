@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Text;
-using SnowQueen.TestTask.DataAccess;
 using SnowQueen.TestTask.DataAccess.Entities;
 
-namespace SnowQueen.TestTask.WPF.Repository
+namespace SnowQueen.TestTask.DataAccess.Repositories
 {
     public class FileRepository<TEntity> : IRepository<TEntity>
         where TEntity: Entity, new()

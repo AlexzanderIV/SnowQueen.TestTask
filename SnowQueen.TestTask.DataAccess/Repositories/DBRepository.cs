@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
-using SnowQueen.TestTask.DataAccess;
 using SnowQueen.TestTask.DataAccess.Entities;
 
-namespace SnowQueen.TestTask.WCFService
+namespace SnowQueen.TestTask.DataAccess.Repositories
 {
     public class DBRepository<TEntity> : IRepository<TEntity>
         where TEntity : Entity
@@ -66,20 +64,5 @@ namespace SnowQueen.TestTask.WCFService
                 _context.Dispose();
             }
         }
-
-        //// TODO: DELETE. TEST SAVE TO DB
-        //public static void TestTask(string name, decimal price, int amount)
-        //{
-        //    using (var repo = new DBRepository<Product>())
-        //    {
-        //        var product = new Product
-        //        {
-        //            Name = name,
-        //            Price = price,
-        //            Amount = amount
-        //        };
-        //        repo.Create(product);
-        //    }
-        //}
     }
 }

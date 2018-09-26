@@ -72,7 +72,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBRepository.cs" />
     <Compile Include="ProductsWebService.svc.cs">
       <DependentUpon>ProductsWebService.svc</DependentUpon>
     </Compile>

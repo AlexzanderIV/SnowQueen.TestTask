@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SnowQueen.TestTask.DataAccess
+namespace SnowQueen.TestTask.DataAccess.Repositories
 {
     public interface IRepository<TEntity> : IDisposable
     {

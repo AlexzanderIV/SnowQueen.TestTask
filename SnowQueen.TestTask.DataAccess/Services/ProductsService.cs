@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SnowQueen.TestTask.DataAccess.Dtos;
 using SnowQueen.TestTask.DataAccess.Entities;
+using SnowQueen.TestTask.DataAccess.Repositories;
 
 namespace SnowQueen.TestTask.DataAccess.Services
 {
-    public class ProductsService
+    public class ProductsService : IDisposable
     {
         private readonly IRepository<Product> _repository;
 
@@ -29,6 +31,11 @@ namespace SnowQueen.TestTask.DataAccess.Services
         {
             var products = _repository.Get();
             return products;
+        }
+
+        public void Dispose()
+        {
+            _repository.Dispose();
         }
     }
 }

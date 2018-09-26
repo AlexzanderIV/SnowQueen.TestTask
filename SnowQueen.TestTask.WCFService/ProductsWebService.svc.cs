@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SnowQueen.TestTask.DataAccess.Dtos;
 using SnowQueen.TestTask.DataAccess.Entities;
+using SnowQueen.TestTask.DataAccess.Repositories;
 using SnowQueen.TestTask.DataAccess.Services;
 
 namespace SnowQueen.TestTask.WCFService
@@ -22,9 +23,9 @@ namespace SnowQueen.TestTask.WCFService
                 throw new ArgumentNullException(nameof(product));
             }
 
-            using (var repository = new DBRepository<Product>())
+            using (var service = ProductsServiceFactory.CreateWithDbRepository())
             {
-                new ProductsService(repository).SaveProduct(ToDto(product));
+                service.SaveProduct(ToDto(product));
             }
         }
 
@@ -39,10 +40,8 @@ namespace SnowQueen.TestTask.WCFService
                 throw new ArgumentNullException(nameof(products));
             }
 
-            using (var repository = new DBRepository<Product>())
+            using (var service = ProductsServiceFactory.CreateWithDbRepository())
             {
-                var service = new ProductsService(repository);
-
                 foreach (var product in products)
                 {
                     service.SaveProduct(ToDto(product));
