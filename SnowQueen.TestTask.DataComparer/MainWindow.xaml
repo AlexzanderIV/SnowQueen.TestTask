@@ -13,13 +13,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <TabControl Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto" Height="auto">
             <TabItem Header="Products from DB">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dgProductsFromDB" Height="351" Margin="10" Width="746" IsReadOnly="True"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Products from File">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dgProductsFromFile" Height="351" Margin="10" Width="746" IsReadOnly="True"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

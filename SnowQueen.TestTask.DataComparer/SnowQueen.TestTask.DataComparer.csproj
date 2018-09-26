@@ -38,6 +38,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,12 +66,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Connected Services\ProductsWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -87,6 +95,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ProductsWebService\ProductsWebService.wsdl" />
+    <None Include="Connected Services\ProductsWebService\ProductsWebService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProductsWebService\ProductsWebService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProductsWebService\ProductsWebService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProductsWebService\SnowQueen.TestTask.DataComparer.ProductsWebService.ProductDataContract.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -100,6 +121,27 @@
       <Project>{49564BE1-2138-462D-937A-32B66EFDCA62}</Project>
       <Name>SnowQueen.TestTask.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ProductsWebService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProductsWebService\ProductsWebService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProductsWebService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProductsWebService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProductsWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

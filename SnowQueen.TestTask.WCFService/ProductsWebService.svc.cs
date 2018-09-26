@@ -75,6 +75,7 @@ namespace SnowQueen.TestTask.WCFService
         {
             return new ProductDataContract
             {
+                Id = product.Id,
                 Name = product.Name,
                 Price = product.Price,
                 Amount = product.Amount

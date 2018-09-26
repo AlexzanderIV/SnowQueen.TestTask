@@ -22,6 +22,9 @@ namespace SnowQueen.TestTask.WCFService
     public class ProductDataContract
     {
         [DataMember]
+        public int Id { get; set; }
+
+        [DataMember]
         public string Name { get; set; }
 
         [DataMember]

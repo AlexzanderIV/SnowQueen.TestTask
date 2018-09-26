@@ -13,6 +13,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowQueen.TestTask.WCFService", "SnowQueen.TestTask.WCFService\SnowQueen.TestTask.WCFService.csproj", "{9DAD4091-7B92-4EEF-B719-04372088E9B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowQueen.TestTask.DataComparer", "SnowQueen.TestTask.DataComparer\SnowQueen.TestTask.DataComparer.csproj", "{AC67685A-A1C1-47F1-AC1D-B77E2A5F54E5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9DAD4091-7B92-4EEF-B719-04372088E9B0} = {9DAD4091-7B92-4EEF-B719-04372088E9B0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

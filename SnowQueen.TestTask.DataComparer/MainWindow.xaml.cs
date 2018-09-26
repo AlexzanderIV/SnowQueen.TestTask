@@ -1,5 +1,4 @@
-﻿using SnowQueen.TestTask.DataAccess.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -14,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SnowQueen.TestTask.DataAccess.Services;
+using SnowQueen.TestTask.DataComparer.ProductsWebService;
 
 namespace SnowQueen.TestTask.DataComparer
 {
@@ -22,16 +23,47 @@ namespace SnowQueen.TestTask.DataComparer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly ProductsWebServiceClient _wcfClient;
+
         public MainWindow()
         {
             InitializeComponent();
+            _wcfClient = new ProductsWebServiceClient("BasicHttpBinding_IProductsWebService");
+            LoadData();
+        }
 
-            // TODO: Call WCF-service
+        private void LoadData()
+        {
+            var errorMessage = string.Empty;
 
-            using (var service = 
+            // Call WCF-service to get products from the DB.
+            try
+            {
+                var productDataContracts = _wcfClient.GetProducts();
+                dgProductsFromDB.ItemsSource = productDataContracts.Select(p => new ProductViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    Amount = p.Amount
+                });
+            }
+            catch (Exception ex)
+            {
+                errorMessage += $"An error has occured while calling the WCF service: {ex.Message}{Environment.NewLine}";
+            }
+
+            using (var service =
                 ProductsServiceFactory.CreateWithFileRepository(ConfigurationManager.AppSettings["FileStoragePath"]))
             {
                 var productsFromFile = service.GetAllProducts();
+                dgProductsFromFile.ItemsSource = productsFromFile.Select(p => new ProductViewModel
+                {
+                   Id = p.Id,
+                   Name = p.Name,
+                   Price = p.Price,
+                   Amount = p.Amount
+                });
             }
         }
     }
