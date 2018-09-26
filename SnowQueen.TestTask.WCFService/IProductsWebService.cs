@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using SnowQueen.TestTask.DataAccess.Dtos;
 
 namespace SnowQueen.TestTask.WCFService
 {
@@ -19,34 +18,16 @@ namespace SnowQueen.TestTask.WCFService
         IEnumerable<ProductDataContract> GetProducts();
     }
 
-
-    // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
     public class ProductDataContract
     {
-        string name;
-        decimal price;
-        int amount;
+        [DataMember]
+        public string Name { get; set; }
 
         [DataMember]
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
+        public decimal Price { get; set; }
 
         [DataMember]
-        public decimal Price
-        {
-            get { return price; }
-            set { price = value; }
-        }
-
-        [DataMember]
-        public int Amount
-        {
-            get { return amount; }
-            set { amount = value; }
-        }
+        public int Amount { get; set; }
     }
 }
