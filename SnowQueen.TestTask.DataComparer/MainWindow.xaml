@@ -12,19 +12,31 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TabControl Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto" Height="auto">
+        <TabControl Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TabItem Header="Products from DB">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dgProductsFromDB" Height="351" Margin="10" Width="746" IsReadOnly="True"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" x:Name="dgProductsFromDb" Margin="10" IsReadOnly="True"/>
+                    <TextBlock Grid.Row="1" x:Name="tblErrorMessageFile" Margin="10" Foreground="Red">TEST</TextBlock>
                 </Grid>
             </TabItem>
             <TabItem Header="Products from File">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dgProductsFromFile" Height="351" Margin="10" Width="746" IsReadOnly="True"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" x:Name="dgProductsFromFile" Margin="10" IsReadOnly="True"/>
+                    <TextBlock Grid.Row="1" x:Name="tblErrorMessageDb" Margin="10" Foreground="Red">TEST 2</TextBlock>
                 </Grid>
             </TabItem>
         </TabControl>
+        <Button Grid.Row="1" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ReloadData">Reload data</Button>
     </Grid>
 </Window>

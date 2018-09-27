@@ -40,7 +40,7 @@ namespace SnowQueen.TestTask.DataComparer
             try
             {
                 var productDataContracts = _wcfClient.GetProducts();
-                dgProductsFromDB.ItemsSource = productDataContracts.Select(p => new ProductViewModel
+                dgProductsFromDb.ItemsSource = productDataContracts.Select(p => new ProductViewModel
                 {
                     Id = p.Id,
                     Name = p.Name,
@@ -50,21 +50,33 @@ namespace SnowQueen.TestTask.DataComparer
             }
             catch (Exception ex)
             {
-                errorMessage += $"An error has occured while calling the WCF service: {ex.Message}{Environment.NewLine}";
+                tblErrorMessageDb.Text = $"An error has occured while calling the WCF service: {ex.Message}{Environment.NewLine}";
             }
 
-            using (var service =
-                ProductsServiceFactory.CreateWithFileRepository(ConfigurationManager.AppSettings["FileStoragePath"]))
+            try
             {
-                var productsFromFile = service.GetAllProducts();
-                dgProductsFromFile.ItemsSource = productsFromFile.Select(p => new ProductViewModel
+                using (var service =
+                ProductsServiceFactory.CreateWithFileRepository(ConfigurationManager.AppSettings["FileStoragePath"]))
                 {
-                   Id = p.Id,
-                   Name = p.Name,
-                   Price = p.Price,
-                   Amount = p.Amount
-                });
+                    var productsFromFile = service.GetAllProducts();
+                    dgProductsFromFile.ItemsSource = productsFromFile.Select(p => new ProductViewModel
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Price = p.Price,
+                        Amount = p.Amount
+                    });
+                }
             }
+            catch (Exception ex)
+            {
+                tblErrorMessageFile.Text = $"An error has occured while loading from file: {ex.Message}{Environment.NewLine}";
+            }
+        }
+
+        private void ReloadData(object sender, RoutedEventArgs e)
+        {
+            LoadData();
         }
     }
 }
