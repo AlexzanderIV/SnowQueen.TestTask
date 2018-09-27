@@ -24,7 +24,7 @@
         <TextBox x:Name="tbPrice" Grid.Row="1" Grid.Column="1" Margin="0,4,0,6" Text="{Binding Path=Price}"></TextBox>
         <Label Grid.Row="2">Amount:</Label>
         <TextBox x:Name="tbAmount" Grid.Row="2" Grid.Column="1" Margin="0,4,0,6" Text="{Binding Path=Amount}"></TextBox>
-        <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="0,20,0,20" HorizontalAlignment="Center" VerticalAlignment="Top" Click="AddProduct">Add product</Button>
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="0,20,0,20" HorizontalAlignment="Center" VerticalAlignment="Top" Click="AddProduct" IsDefault="True">Add product</Button>
         <TextBlock x:Name="tblResult" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,20,0,20" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="WrapWithOverflow"></TextBlock>
     </Grid>
 </Window>

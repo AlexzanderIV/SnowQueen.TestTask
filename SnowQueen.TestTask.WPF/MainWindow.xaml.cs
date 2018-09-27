@@ -2,13 +2,7 @@
 using System.Configuration;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using SnowQueen.TestTask.DataAccess.Services;
 using SnowQueen.TestTask.WPF.ProductsWebService;
 
@@ -33,6 +27,9 @@ namespace SnowQueen.TestTask.WPF
 
         private void AddProduct(object sender, RoutedEventArgs e)
         {
+            var button = ((Button)sender);
+            button.IsEnabled = false;
+
             tblResult.Text = string.Empty;
 
             bool isSuccess = false;
@@ -87,6 +84,8 @@ namespace SnowQueen.TestTask.WPF
             
             // Clear form.
             UpdateBinding();
+
+            button.IsEnabled = true;
         }
 
         private void UpdateBinding()

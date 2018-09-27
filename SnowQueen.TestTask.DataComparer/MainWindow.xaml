@@ -23,7 +23,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <DataGrid Grid.Row="0" x:Name="dgProductsFromDb" Margin="10" IsReadOnly="True"/>
-                    <TextBlock Grid.Row="1" x:Name="tblErrorMessageFile" Margin="10" Foreground="Red">TEST</TextBlock>
+                    <TextBlock Grid.Row="1" x:Name="tblErrorMessageFile" Margin="10" Foreground="Red"></TextBlock>
                 </Grid>
             </TabItem>
             <TabItem Header="Products from File">
@@ -33,7 +33,10 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <DataGrid Grid.Row="0" x:Name="dgProductsFromFile" Margin="10" IsReadOnly="True"/>
-                    <TextBlock Grid.Row="1" x:Name="tblErrorMessageDb" Margin="10" Foreground="Red">TEST 2</TextBlock>
+                    <StackPanel Grid.Row="1">
+                        <Button  Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddProductsToDb">Add products to DB</Button>
+                        <TextBlock Grid.Row="1" x:Name="tblErrorMessageDb" Margin="10" Foreground="Red"></TextBlock>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>

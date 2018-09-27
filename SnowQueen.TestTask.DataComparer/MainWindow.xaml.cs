@@ -1,20 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using SnowQueen.TestTask.DataAccess.Services;
-using SnowQueen.TestTask.DataComparer.ProductsWebService;
 
 namespace SnowQueen.TestTask.DataComparer
 {
@@ -23,12 +11,11 @@ namespace SnowQueen.TestTask.DataComparer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ProductsWebServiceClient _wcfClient;
+        private IEnumerable<ProductViewModel> filteredProductsFromFile;
 
         public MainWindow()
         {
             InitializeComponent();
-            _wcfClient = new ProductsWebServiceClient("BasicHttpBinding_IProductsWebService");
             LoadData();
         }
 
@@ -36,37 +23,25 @@ namespace SnowQueen.TestTask.DataComparer
         {
             var errorMessage = string.Empty;
 
+            // This needs to filter out products from the File.
+            IEnumerable<ProductViewModel> productsFromDb = null;
+
             // Call WCF-service to get products from the DB.
             try
             {
-                var productDataContracts = _wcfClient.GetProducts();
-                dgProductsFromDb.ItemsSource = productDataContracts.Select(p => new ProductViewModel
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Price = p.Price,
-                    Amount = p.Amount
-                });
+                productsFromDb = ProductsProvider.GetProductsFromDb().ToList();
+                dgProductsFromDb.ItemsSource = productsFromDb;
             }
             catch (Exception ex)
             {
                 tblErrorMessageDb.Text = $"An error has occured while calling the WCF service: {ex.Message}{Environment.NewLine}";
             }
 
+            // Read products from the File.
             try
             {
-                using (var service =
-                ProductsServiceFactory.CreateWithFileRepository(ConfigurationManager.AppSettings["FileStoragePath"]))
-                {
-                    var productsFromFile = service.GetAllProducts();
-                    dgProductsFromFile.ItemsSource = productsFromFile.Select(p => new ProductViewModel
-                    {
-                        Id = p.Id,
-                        Name = p.Name,
-                        Price = p.Price,
-                        Amount = p.Amount
-                    });
-                }
+                filteredProductsFromFile = ProductsProvider.GetFilteredProductsFromFile(productsFromDb).ToList();
+                dgProductsFromFile.ItemsSource = filteredProductsFromFile;
             }
             catch (Exception ex)
             {
@@ -76,7 +51,23 @@ namespace SnowQueen.TestTask.DataComparer
 
         private void ReloadData(object sender, RoutedEventArgs e)
         {
+            var button = ((Button)sender);
+            button.IsEnabled = false;
+
             LoadData();
+
+            button.IsEnabled = true;
+        }
+
+        private void AddProductsToDb(object sender, RoutedEventArgs e)
+        {
+            var button = ((Button)sender);
+            button.IsEnabled = false;
+
+            ProductsProvider.AddProductsToDb(filteredProductsFromFile);
+            LoadData();
+
+            button.IsEnabled = true;
         }
     }
 }
